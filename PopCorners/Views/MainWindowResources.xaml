@@ -1,0 +1,220 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:PopCorners.ViewModels"
+                    xmlns:vms="clr-namespace:PopCorners.ViewModels.Single"
+                    xmlns:vmm="clr-namespace:PopCorners.ViewModels.Many"
+                    xmlns:vmm2m="clr-namespace:PopCorners.ViewModels.Many.ManyToMany"
+                    xmlns:vws="clr-namespace:PopCorners.Views.Single"
+                    xmlns:vwm="clr-namespace:PopCorners.Views.Many" 
+                    xmlns:vwm2m="clr-namespace:PopCorners.Views.Many.ManyToMany">
+
+    <DataTemplate DataType="{x:Type vms:ProductionVM}">
+        <vws:ProductionView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MProductionsVM}">
+        <vwm:MProductionsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:GenreVM}">
+        <vws:GenreView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MGenresVM}">
+        <vwm:MGenresView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:TagVM}">
+        <vws:TagView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MTagsVM}">
+        <vwm:MTagsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:AwardVM}">
+        <vws:AwardView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MAwardsVM}">
+        <vwm:MAwardsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:ActorVM}">
+        <vws:ActorView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MActorsVM}">
+        <vwm:MActorsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:DirectorVM}">
+        <vws:DirectorView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MDirectorsVM}">
+        <vwm:MDirectorsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:PlatformVM}">
+        <vws:PlatformView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MPlatformsVM}">
+        <vwm:MPlatformsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:UserVM}">
+        <vws:UserView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MUsersVM}">
+        <vwm:MUsersView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:SeasonVM}">
+        <vws:SeasonView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MSeasonsVM}">
+        <vwm:MSeasonsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vms:SeriesVM}">
+        <vws:SeriesView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm:MSeriesVM}">
+        <vwm:MSeriesView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm2m:MProductionCastsVM}">
+        <vwm2m:MProductionCastsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm2m:MProductionAwardsVM}">
+        <vwm2m:MProductionAwardsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm2m:MFavouritesVM}">
+        <vwm2m:MFavouritesView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm2m:MReviewsVM}">
+        <vwm2m:MReviewsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm2m:MProductionTagsVM}">
+        <vwm2m:MProductionTagsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmm2m:MProductionGenresVM}">
+        <vwm2m:MProductionGenresView/>
+    </DataTemplate>
+
+    <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <!-- 
+        This template ensures that content of a HeaderedContentControl 
+        fills the available vertical space. 
+        -->
+                <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+                    <DockPanel>
+                        <ContentPresenter 
+                          DockPanel.Dock="Top"
+                          ContentSource="Header" 
+                          ContentTemplate="{TemplateBinding HeaderTemplate}" 
+                          />
+                        <ContentPresenter 
+                          ContentSource="Content" 
+                          ContentTemplate="{TemplateBinding ContentTemplate}" 
+                          />
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+  This style ensures that the borders in the main window are consistent.
+  -->
+    <Style x:Key="MainBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="WhiteSmoke" />
+        <Setter Property="BorderBrush" Value="LightGray" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+    </Style>
+
+    <!--
+  This template explains how to render the list of commands on the left
+  side in the main window (the 'Control Panel' area).
+  -->
+
+    <DataTemplate x:Key="CommandsTemplate">
+        <ItemsControl IsTabStop="False" ItemsSource="{Binding}" Margin="6,2">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding DisplayName}" Command="{Binding Path=Command}" Margin="6" Padding="5" Background="LightBlue" BorderThickness="0"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CommandSetsTemplate">
+        <ItemsControl IsTabStop="False" ItemsSource="{Binding}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Background="#13445A" Margin="20, 0">
+                        <TextBlock Text="{ Binding Path=DisplayName}" Style="{StaticResource DarkLightText}" Background="#13445A" Foreground="White" FontWeight="DemiBold" Margin="15, 0"/>
+                        <Separator Width="Auto" HorizontalAlignment="Stretch" Style="{StaticResource LightSeparator}" />
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"  Margin="-20, 0" Background="#13445A">
+                            <Button Grid.Column="0" Grid.Row="1" Content="Create new" Command="{Binding Path=CommandSingle}" Style="{StaticResource BlueButton}" Width="100" Height="50" Margin="3"/>
+                            <Button Grid.Column="1" Grid.Row="1" Content="Show all" Command="{Binding Path=CommandMany}" Style="{StaticResource BlueButton}" Width="100" Height="50" Margin="3"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DataTemplate>
+
+    <!--<DataTemplate x:Key="CommandsTemplate">
+        <ItemsControl IsTabStop="False" ItemsSource="{Binding}" Margin="10">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding DisplayName}" Command="{Binding Path=Command}" Style="{StaticResource DarkButton}" Margin="0" Height="80"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DataTemplate>-->
+
+    <!-- 
+  This template explains how to render 
+  a tab item with a close button.
+  -->
+    <DataTemplate x:Key="ClosableTabItemTemplate">
+        <DockPanel Width="120">
+            <Button 
+            Command="{Binding Path=CloseCommand}"
+            Content="X"
+            Cursor="Hand"
+            DockPanel.Dock="Right"
+            Focusable="False"
+            FontFamily="Courier" 
+            FontSize="9"
+            FontWeight="Bold"  
+            Margin="0,1,0,0"
+            Padding="0"
+            VerticalContentAlignment="Bottom"
+            Width="16" Height="16" 
+            />
+            <ContentPresenter 
+            Content="{Binding Path=DisplayName}" 
+            VerticalAlignment="Center" 
+            />
+        </DockPanel>
+    </DataTemplate>
+
+    <!--
+  This template explains how to render the 'Workspace' content area in the main window.
+  -->
+    <DataTemplate x:Key="WorkspacesTemplate">
+        <TabControl 
+      IsSynchronizedWithCurrentItem="True" 
+      ItemsSource="{Binding}" 
+      ItemTemplate="{StaticResource ClosableTabItemTemplate}"
+      Margin="4"
+      />
+    </DataTemplate>
+
+
+</ResourceDictionary>

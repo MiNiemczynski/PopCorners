@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="PopCorners.Views.Single.PlatformView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PopCorners.Views.Single" 
+             xmlns:Single="clr-namespace:PopCorners.ViewModels.Single" 
+             xmlns:Converters="clr-namespace:PopCorners.Helpers.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Views/ViewStyleResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Converters:AssignedBySystemConverter x:Key="AssignedBySystemConverter"/>
+            <Converters:DateOnlyToDateTimeConverter x:Key="DateOnlyToDateTimeConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <d:UserControl.DataContext>
+        <Single:PlatformVM/>
+    </d:UserControl.DataContext>
+
+    <Grid Margin="10"  Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="auto"/>
+            <RowDefinition  Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0" Background="#13445A">
+            <Button Content="New" Style="{StaticResource DarkButton}" Command="{Binding NewCommand}" />
+            <Button Content="Duplicate" Style="{StaticResource DarkButton}" Command="{Binding DuplicateCommand}" />
+        </ToolBar>
+        <Grid Grid.Row="1" HorizontalAlignment="Center" Margin="5 20 5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="PlatformID" TextWrapping="Wrap" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding PlatformId, Converter={StaticResource AssignedBySystemConverter}}" IsEnabled="False"/>
+            <TextBlock Grid.Column="0" Grid.Row="1"  Text="Name" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding PlatformName}"/>
+
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="5 20 5 0">
+                <TextBlock Text="Historical data" Style="{StaticResource DarkLightText}" FontWeight="DemiBold"/>
+                <Separator Width="Auto" HorizontalAlignment="Stretch" Style="{StaticResource DarkSeparator}" />
+            </StackPanel>
+
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Creation date" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox  Grid.Column="1" Grid.Row="3" Text="{Binding CreationDate, Converter={StaticResource AssignedBySystemConverter}}" IsEnabled="False"/>
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Edition date" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox  Grid.Column="1" Grid.Row="4" Text="{Binding EditionDate, Converter={StaticResource AssignedBySystemConverter}}" IsEnabled="False"/>
+
+            <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="5 20 5 0" HorizontalAlignment="Center">
+                <Button Content=" Cancel and close " Command="{Binding CancelCommand}" Style="{StaticResource DarkDangerBigButton}"></Button>
+                <Button Content="Save changes" Command="{Binding ValidateCommand}" Style="{StaticResource DarkBigButton}"></Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

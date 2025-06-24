@@ -1,0 +1,88 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PopCorners.Views.Single" 
+             xmlns:Converters="clr-namespace:PopCorners.Helpers.Converters"
+             xmlns:Single="clr-namespace:PopCorners.ViewModels.Single" x:Class="PopCorners.Views.Single.SeasonView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Views/ViewStyleResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Converters:AssignedBySystemConverter x:Key="AssignedBySystemConverter"/>
+            <Converters:DateOnlyToDateTimeConverter x:Key="DateOnlyToDateTimeConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <d:UserControl.DataContext>
+        <Single:SeasonVM/>
+    </d:UserControl.DataContext>
+
+    <Grid Margin="10"  Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="auto"/>
+            <RowDefinition  Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0" Background="#13445A">
+            <Button Content="New" Style="{StaticResource DarkButton}" Command="{Binding NewCommand}" />
+            <Button Content="Duplicate" Style="{StaticResource DarkButton}" Command="{Binding DuplicateCommand}" />
+
+        </ToolBar>
+        <Grid Grid.Row="1" HorizontalAlignment="Center" Margin="5 20 5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="SeasonID" TextWrapping="Wrap" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SeasonId, Converter={StaticResource AssignedBySystemConverter}}" IsEnabled="False"/>
+            <TextBlock Grid.Column="0" Grid.Row="1"  Text="Series" Style="{StaticResource DarkLightFormText}"/>
+            
+            <ComboBox Grid.Column="1" Grid.Row="1" Margin="6, 0" Style="{StaticResource DarkLightCombobox}" ItemsSource="{Binding AllSeries}" 
+                      DisplayMemberPath="Title" SelectedValuePath="ID" SelectedValue="{Binding SeriesId}" />
+            
+            <TextBlock Grid.Column="0" Grid.Row="2"  Text="Season number" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SeasonNumber}"/>
+            <TextBlock Grid.Column="0" Grid.Row="3"  Text="Episodes" Style="{StaticResource DarkLightFormText}"/>
+            
+            <ComboBox Grid.Column="1" Grid.Row="3" Margin="6, 0" Style="{StaticResource DarkLightCombobox}" ItemsSource="{Binding Episodes}" 
+                      DisplayMemberPath="Title" SelectedValuePath="ID" SelectedValue="{Binding SelectedEpisodeId}" />
+            
+            <TextBlock Grid.Column="0" Grid.Row="4"  Text="Description" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" Height="77" TextWrapping="WrapWithOverflow" Width="200" Text="{Binding Description}"/>
+
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="5 20 5 0">
+                <TextBlock Text="Historical data" Style="{StaticResource DarkLightText}" FontWeight="DemiBold"/>
+                <Separator Width="Auto" HorizontalAlignment="Stretch" Style="{StaticResource DarkSeparator}" />
+            </StackPanel>
+
+            <TextBlock Grid.Column="0" Grid.Row="7" Text="Creation date" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox  Grid.Column="1" Grid.Row="7" Text="{Binding CreationDate, Converter={StaticResource AssignedBySystemConverter}}" IsEnabled="False"/>
+            <TextBlock Grid.Column="0" Grid.Row="8" Text="Edition date" Style="{StaticResource DarkLightFormText}"/>
+            <TextBox  Grid.Column="1" Grid.Row="8" Text="{Binding EditionDate, Converter={StaticResource AssignedBySystemConverter}}" IsEnabled="False"/>
+
+            <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="5 20 5 0" HorizontalAlignment="Center">
+                <Button Content=" Cancel and close " Command="{Binding CancelCommand}" Style="{StaticResource DarkDangerBigButton}"/>
+                <Button Content="Save changes" Command="{Binding ValidateCommand}" Style="{StaticResource DarkBigButton}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="PopCorners.Views.Many.MTagsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PopCorners.Views.Many" xmlns:Many="clr-namespace:PopCorners.ViewModels.Many"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <d:UserControl.DataContext>
+        <Many:MTagsVM/>
+    </d:UserControl.DataContext>
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Views/ViewStyleResources.xaml"/>
+    </UserControl.Resources>
+    <Grid Margin="10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Header="Filters" Style="{StaticResource DarkLightGroupBox}">
+            <WrapPanel Margin="5">
+                <Label Content="    Search by:" />
+                <ComboBox Height="30" ItemsSource="{Binding SearchOption}" SelectedValuePath="PropertyName" DisplayMemberPath="DisplayName" SelectedValue="{Binding SearchProperty}"/>
+                <TextBox Height="30" FontSize="16" Text="{Binding SearchInput}"/>
+
+                <Label Content="    Order (ascending? " />
+                <CheckBox VerticalContentAlignment="Center" IsChecked="{Binding OrderAscending}"/>
+                <Label Content=") by " />
+                <ComboBox Height="30" ItemsSource="{Binding OrderOption}" SelectedValuePath="PropertyName" DisplayMemberPath="DisplayName" SelectedValue="{Binding OrderProperty}"/>
+                <Label Content="    " />
+
+                <Button Height="30" Content="Filter" Command="{Binding FilterCommand}"/>
+                <Button Height="30" Content="Clear" Command="{Binding ClearFilterCommand}"/>
+            </WrapPanel>
+        </GroupBox>
+        <ToolBar Grid.Row="1" Background="#13445A" Margin="0, 10">
+            <Button Content="Add" Style="{StaticResource DarkButton}" Command="{Binding AddCommand}" />
+            <Button Content="Edit" Style="{StaticResource DarkButton}" Command="{Binding EditCommand}" />
+            <Button Content="Delete" Style="{StaticResource DarkDangerButton}" Command="{Binding DeleteCommand}" />
+            <Button Content="Refresh" Style="{StaticResource DarkButton}" Command="{Binding RefreshCommand, UpdateSourceTrigger=PropertyChanged }" />
+        </ToolBar>
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" ItemsSource="{Binding Models}" SelectedItem="{Binding SelectedModel}" Style="{StaticResource DarkDataGrid}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="50" Binding="{Binding TagId}"/>
+                <DataGridTextColumn Header="Name" Width="200" Binding="{Binding TagName}"/>
+                <DataGridTextColumn Header="Creation date" Width="250" Binding="{Binding CreationDate}"/>
+                <DataGridTextColumn Header="Edition date" Width="250" Binding="{Binding EditionDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,311 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vms="clr-namespace:PopCorners.ViewModels.Single"
+                    xmlns:vmm="clr-namespace:PopCorners.ViewModels.Many"
+                    xmlns:vws="clr-namespace:PopCorners.Views.Single"
+                    xmlns:vwm="clr-namespace:PopCorners.Views.Many">
+
+    <!-- Text block style -->
+    <Style x:Key="DarkLightText" TargetType="TextBlock">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="#13445A" />
+        <Setter Property="FontSize" Value="24" />
+    </Style>
+
+    <!-- Text block in form style -->
+    <Style x:Key="DarkLightFormText" TargetType="TextBlock" BasedOn="{StaticResource DarkLightText}">
+        <Setter Property="Margin" Value="6 3" />
+        <Setter Property="MaxWidth" Value="300" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="FontWeight" Value="Normal" />
+    </Style>
+    
+    <!-- Text box style -->
+    <Style TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="6 3" />
+        <Setter Property="Padding" Value="3 0" />
+        <Setter Property="MinWidth" Value="250" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="BorderBrush" Value="#446878" />
+    </Style>
+
+    <!-- Text box disabled template -->
+    <Style x:Key="AssignedBySystem" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+        <Setter Property="Text" Value="Assigned by system" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsExisting}" Value="False">
+                <Setter Property="Text" Value="Assigned by system" />
+                <Setter Property="Foreground" Value="BlueViolet" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Date picker in form style -->
+    <Style TargetType="DatePicker">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="6 3" />
+        <Setter Property="Padding" Value="3 0" />
+        <Setter Property="MinWidth" Value="250" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="BorderBrush" Value="#446878" />
+    </Style>
+
+    <!-- Combo box style -->
+    <Style x:Key="DarkLightCombobox" TargetType="ComboBox">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="#13445A" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="MaxDropDownHeight" Value="150" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
+    </Style>
+    
+    <!-- Separator dark style -->
+    <Style TargetType="Separator" x:Key="DarkSeparator">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Border Background="#13445A" Height="2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="0 6" />
+    </Style>
+    
+    <!-- Separator light style -->
+    <Style TargetType="Separator" x:Key="LightSeparator">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Border Background="White" Height="2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="0 6" />
+    </Style>
+
+
+    <!-- Group box style -->
+    <Style x:Key="DarkLightGroupBox" TargetType="GroupBox">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="#13445A" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="BorderBrush" Value="#13445A" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <!-- Button dark style -->
+    <Style x:Key="DarkButton" TargetType="Button">
+        <Setter Property="Background" Value="#13445A" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="10 3" />
+        <Setter Property="MinWidth" Value="85" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#446878" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#13445A" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Button blue style -->
+    <Style x:Key="BlueButton" TargetType="Button" BasedOn="{StaticResource DarkButton}">
+        <Setter Property="Background" Value="#446878" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="#446878" BorderThickness="3" CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#13445A" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#446878" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Big button style -->
+    <Style x:Key="DarkBigButton" TargetType="Button" BasedOn="{StaticResource DarkButton}">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Padding" Value="30 10 30 10" />
+        <Setter Property="MinWidth" Value="160" />
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#446878" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#13445A" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Danger button style -->
+    <Style x:Key="DarkDangerButton" TargetType="Button" BasedOn="{StaticResource DarkButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#970747" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#13445A" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Danger big button style -->
+    <Style x:Key="DarkDangerBigButton" TargetType="Button" BasedOn="{StaticResource DarkBigButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#970747" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#13445A" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Data grid style -->
+    <Style x:Key="DarkDataGrid" TargetType="DataGrid">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="FontSize" Value="16" />
+
+        <!-- Header style -->
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridColumnHeader">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#970747" />
+                            <Setter Property="Cursor" Value="Hand" />
+                        </Trigger>
+                        
+                        <!-- Sorting asc -->
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter Property="Background" Value="#13445A" />
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding}" />
+                                            <Path Data="M 0,10 L 5,0 L 10,10 Z" Fill="White" Width="10" Height="10" Margin="5, 0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <!-- Sorting desc -->
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter Property="Background" Value="#13445A" />
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding}" HorizontalAlignment="Left"/>
+                                            <Path Data="M 0,0 L 5,10 L 10,0 Z" Fill="White" Width="10" Height="10" Margin="5, 0"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                    <Setter Property="Background" Value="#446878" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Padding" Value="5" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Row style -->
+        <Setter Property="RowStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Padding" Value="3" />
+                    <Setter Property="Background" Value="#FEF4E8" />
+                    <Setter Property="Foreground" Value="#13445A" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#13445A" />
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+
+        <!-- Cell style -->
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Style.Triggers>
+                        <!-- Spójne tło i tekst dla zaznaczonych komórek -->
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#13445A" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="BorderThickness" Value="0" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
