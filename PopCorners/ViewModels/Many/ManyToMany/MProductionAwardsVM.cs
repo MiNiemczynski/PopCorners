@@ -8,11 +8,7 @@ namespace PopCorners.ViewModels.Many.ManyToMany
     {
         public MProductionAwardsVM() : base("Production Awards")
         {
-        }
 
-        protected override void ClearFilters()
-        {
-            throw new NotImplementedException();
         }
     }
 }

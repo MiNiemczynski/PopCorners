@@ -10,10 +10,5 @@ namespace PopCorners.ViewModels.Many.ManyToMany
         {
 
         }
-
-        protected override void ClearFilters()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

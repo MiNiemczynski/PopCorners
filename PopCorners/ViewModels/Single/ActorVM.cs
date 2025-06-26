@@ -116,20 +116,6 @@ namespace PopCorners.ViewModels.Single
 
                 if (IsExisting) Update();
                 else Save();
-
-                //List<ActorDTO> models = Service.GetModels();
-                //foreach (ActorDTO model in models)
-                //    if (model.ActorId == Model.ActorId)
-                //    {
-                //        Debug.WriteLine("[!] ID nie może się powtarzać");
-                //        return; // id nie może się powtórzyć
-                //    }
-
-                //if (Model.BirthDate >= DateOnly.FromDateTime(DateTime.Now) || Model.BirthDate == null)
-                //{
-                //    Debug.WriteLine("[!] Data musi być przeszła");
-                //    return; // data musi być przeszła
-                //}
             }
         }
     }

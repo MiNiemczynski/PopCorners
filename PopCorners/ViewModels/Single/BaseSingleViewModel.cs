@@ -49,7 +49,6 @@ namespace PopCorners.ViewModels.Single
         {
             Service.AddModel(Model);
             OnRequestClose();
-            //WeakReferenceMessenger.Default.Send(new ValueChangedMessage<DtoType?>(Service.GetDTO(Model)));
             New();
         }
         protected void Update()
@@ -67,11 +66,7 @@ namespace PopCorners.ViewModels.Single
         }
         protected void Delete()
         {
-            //if (Model != null)
-            //{
-            //    Service.DeleteModel(Model);
-            //    Models.Remove(Model);
-            //}
+            throw new NotImplementedException();
         }
     }
 }

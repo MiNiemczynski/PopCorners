@@ -137,6 +137,10 @@ namespace PopCorners.ViewModels.Many
                 Models.Remove(SelectedModel);
             }
         }
-        protected abstract void ClearFilters();
+        protected virtual void ClearFilters()
+        {
+            SetDefaultSearchOption();
+            Refresh();
+        }
     }
 }

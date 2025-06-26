@@ -8,16 +8,7 @@ namespace PopCorners.ViewModels.Many
     {
         public MActorsVM() : base("Actors")
         {
-            //WeakReferenceMessenger.Default.Register<ValueChangedMessage<Actor?>>(this, (sender, message) => DeleteActorVM(message.Value));
-        }
-        //private void DeleteActorVM(Actor model)
-        //{
-        //    Models.Remove(model);
-        //}
-        protected override void ClearFilters()
-        {
-            SetDefaultSearchOption();
-            Refresh();
+
         }
     }
 }

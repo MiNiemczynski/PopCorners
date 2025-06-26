@@ -1,6 +1,6 @@
 ﻿public class Program()
 {
-    public static void init()
+    public static void Init()
     {
 
     }
